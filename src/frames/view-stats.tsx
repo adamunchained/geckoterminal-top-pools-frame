@@ -20,7 +20,10 @@ export const viewStats = async (c: any) => {
             </Text>
           </VStack>
         </Box>
-      )
+      ),
+      intents: [
+        <Button action={'/view/' + network}>{'🔃 Try Again'}</Button>,
+      ],
     });
   }
 
@@ -69,7 +72,7 @@ export const viewStats = async (c: any) => {
     </Box>
     ),
     intents: [
-      <Button action={'/view/' + network}>{'🔝 Pools for ' + network.toUpperCase() + ' 🔃'}</Button>,
+      <Button action={'/view/' + network}>{'🔃 TOP Pools for ' + network.toUpperCase()}</Button>,
     ],
   });
 };
