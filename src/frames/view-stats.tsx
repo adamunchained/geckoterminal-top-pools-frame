@@ -10,13 +10,13 @@ let USDollar = new Intl.NumberFormat('en-US', {
 export const viewStats = async (c: any) => {
   const network = c.req.param('network') || '';
   const stats = await getTopFivePools(network);
-  if (!stats) {
+  if (!stats || stats?.error) {
     return c.res({
       image: (
         <Box grow alignHorizontal="center" backgroundColor="blue700" padding="128">
           <VStack gap="4">
             <Text size="20">
-              Unable to get stats for selected network from GeckoTerminal!
+              {stats?.error || 'Unable to get stats for selected network from GeckoTerminal!'}
             </Text>
           </VStack>
         </Box>

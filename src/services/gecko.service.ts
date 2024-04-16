@@ -8,6 +8,14 @@ export const getTopFivePools = async (network: string): Promise<any> => {
     if (!obj) {
       return;
     }
+
+    if (obj?.status?.error_code === 429) {
+      return {
+        error:
+          'Frame exceeded the APIs Rate Limit. We only use free tier API access to Coingecko. Try again later.',
+      };
+    }
+
     return obj.data.slice(0, 5).map((o: any) => {
       return {
         name: o.attributes.name,
@@ -17,6 +25,7 @@ export const getTopFivePools = async (network: string): Promise<any> => {
       };
     });
   } catch (e) {
+    console.error(e);
     // Super stupid and basic error handling.
     return;
   }
